@@ -1,6 +1,7 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "ezstorage:blocks/search_box"
+        "all": "ezstorage:blocks/search_box",
+        "particle": "ezstorage:blocks/search_box"
     }
 }
