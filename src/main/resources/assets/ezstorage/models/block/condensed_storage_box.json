@@ -6,6 +6,7 @@
         "north": "ezstorage:blocks/condensed_storage_box",
         "south": "ezstorage:blocks/condensed_storage_box",
         "east": "ezstorage:blocks/condensed_storage_box",
-        "west": "ezstorage:blocks/condensed_storage_box"
+        "west": "ezstorage:blocks/condensed_storage_box",
+        "particle": "ezstorage:blocks/condensed_storage_box"
     }
 }

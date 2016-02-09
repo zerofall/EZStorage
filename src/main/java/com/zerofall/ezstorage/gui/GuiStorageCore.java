@@ -268,6 +268,9 @@ public class GuiStorageCore extends GuiContainer {
 			int elementX = this.searchField.xPosition;
 			int elementY = this.searchField.yPosition;
 			if (mouseX >= elementX && mouseX <= elementX + this.searchField.width && mouseY >= elementY && mouseY <= elementY + this.searchField.height) {
+				if(mouseButton==1||GuiScreen.isShiftKeyDown()){
+					this.searchField.setText("");
+				}
 				this.searchField.setFocused(true);
 			} else {
 				this.searchField.setFocused(false);

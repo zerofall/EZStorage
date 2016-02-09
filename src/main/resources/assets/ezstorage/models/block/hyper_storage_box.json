@@ -6,6 +6,7 @@
         "north": "ezstorage:blocks/hyper_storage_box",
         "south": "ezstorage:blocks/hyper_storage_box",
         "east": "ezstorage:blocks/hyper_storage_box",
-        "west": "ezstorage:blocks/hyper_storage_box"
+        "west": "ezstorage:blocks/hyper_storage_box",
+        "particle": "ezstorage:blocks/hyper_storage_box"
     }
 }
