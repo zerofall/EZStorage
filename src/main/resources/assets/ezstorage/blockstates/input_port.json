@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"normal": {"model": "ezstorage:input_port"}
+	}
+}
