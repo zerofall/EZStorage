@@ -156,7 +156,11 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn) {
-		
+		clearGrid(playerIn);
+		super.onContainerClosed(playerIn);
+	}
+	
+	public void clearGrid(EntityPlayer playerIn){
 		for (int i=0; i<9; i++) {
 			ItemStack stack = this.craftMatrix.getStackInSlot(i);
 			if (stack != null) {
@@ -166,6 +170,5 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 				}
 			}
 		}
-		super.onContainerClosed(playerIn);
 	}
 }
