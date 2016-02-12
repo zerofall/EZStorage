@@ -115,7 +115,9 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 		        			recipe[i] = this.craftMatrix.getStackInSlot(i);
 		        		}
 		        		ItemStack result = super.slotClick(slotId, clickedButton, mode, playerIn);
-		        		tryToPopulateCraftingGrid(recipe);
+		        		if (result != null) {
+		        			tryToPopulateCraftingGrid(recipe);
+		        		}
 		        		return result;
 		        	}
 		        }
