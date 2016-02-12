@@ -1,6 +1,7 @@
 package com.zerofall.ezstorage.gui;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 import com.zerofall.ezstorage.EZStorage;
 import com.zerofall.ezstorage.Reference;
@@ -90,7 +92,26 @@ public class GuiStorageCore extends GuiContainer {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		handleScrolling(mouseX, mouseY);
 		updateFilteredItems();
-		fontRendererObj.drawString(this.tileEntity.inventory.getTotalCount() + "/" + this.tileEntity.inventory.maxItems, 125, 6, 4210752);
+		DecimalFormat formatter = new DecimalFormat("#,###");
+		String totalCount = formatter.format(this.tileEntity.inventory.getTotalCount());
+		String max = formatter.format(this.tileEntity.inventory.maxItems);
+		String amount = totalCount + "/" + max;
+		//Right-align text
+		int stringWidth = fontRendererObj.getStringWidth(amount);
+		
+		//Scale down text if its too large
+		if (stringWidth > 88) {
+			float ScaleFactor = 0.7f;
+			float RScaleFactor = 1.0f / ScaleFactor;
+			GL11.glPushMatrix();
+			GL11.glScaled( ScaleFactor, ScaleFactor, ScaleFactor );
+			int X = (int) (((float) 187 - stringWidth * ScaleFactor) * RScaleFactor);
+			fontRendererObj.drawString(amount, X, 10, 4210752);
+			GL11.glPopMatrix();
+		} else {
+			fontRendererObj.drawString(amount, 187 - stringWidth, 6, 4210752);
+		}
+		
 		int x = 8;
 		int y = 18;
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
