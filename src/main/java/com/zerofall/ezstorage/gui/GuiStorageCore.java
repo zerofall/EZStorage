@@ -173,6 +173,9 @@ public class GuiStorageCore extends GuiContainer {
                 super.keyTyped(typedChar, keyCode);
             }
         }
+		if(keyCode==63){
+			this.tileEntity.sortInventory();
+		}
 	}
 	
 	private void updateFilteredItems() {

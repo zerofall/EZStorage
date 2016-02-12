@@ -21,6 +21,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class EZBlocks {
 	
@@ -80,45 +81,45 @@ public class EZBlocks {
 	}
 	
 	public static void registerRecipes() {
-		GameRegistry.addRecipe(new ItemStack(storage_core),
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(storage_core),
 		    	"ABA",
 		    	"BCB",
 		    	"ABA",
-		    	'A', Blocks.log, 'B', Items.stick, 'C', Blocks.chest);
-		GameRegistry.addRecipe(new ItemStack(storage_box),
+		    	'A', "logWood", 'B', "stickWood", 'C', Blocks.chest));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(storage_box),
 		    	"ABA",
 		    	"B B",
 		    	"ABA",
-		    	'A', Blocks.log, 'B', Blocks.chest);
-		GameRegistry.addRecipe(new ItemStack(condensed_storage_box),
+		    	'A', "logWood", 'B', Blocks.chest));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(condensed_storage_box),
 		    	"ACA",
 		    	"CBC",
 		    	"ACA",
-		    	'A', Blocks.iron_block, 'B', storage_box, 'C', Blocks.iron_bars);
+		    	'A', "blockIron", 'B', storage_box, 'C', Blocks.iron_bars));
 		GameRegistry.addRecipe(new ItemStack(hyper_storage_box),
 		    	"ABA",
 		    	"ACA",
 		    	"AAA",
 		    	'A', Blocks.obsidian, 'B', Items.nether_star, 'C', condensed_storage_box);
-		GameRegistry.addRecipe(new ItemStack(input_port),
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(input_port),
 		    	"ABA",
 		    	"BCB",
 		    	"ABA",
-		    	'A', Blocks.hopper, 'B', Blocks.piston, 'C', Blocks.quartz_block);
-		GameRegistry.addRecipe(new ItemStack(output_port),
+		    	'A', Blocks.hopper, 'B', Blocks.piston, 'C', "blockQuartz"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(output_port),
 		    	"A",
 		    	"B",
 		    	"A",
-		    	'A', Blocks.piston, 'B', input_port);
-		GameRegistry.addRecipe(new ItemStack(crafting_box),
+		    	'A', Blocks.piston, 'B', input_port));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(crafting_box),
 		    	"ABA",
 		    	"BCB",
 		    	"ABA",
-		    	'A', Items.ender_eye, 'B', Blocks.crafting_table, 'C', Items.diamond);
-		GameRegistry.addRecipe(new ItemStack(search_box),
+		    	'A', Items.ender_eye, 'B', Blocks.crafting_table, 'C', "gemDiamond"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(search_box),
 		    	"ABA",
 		    	"BCB",
 		    	"ABA",
-		    	'A', Blocks.iron_block, 'B', Items.enchanted_book, 'C', Items.compass);
+		    	'A', "blockIron", 'B', Items.enchanted_book, 'C', Items.compass));
 	}
 }
