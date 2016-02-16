@@ -5,7 +5,6 @@ import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -16,6 +15,7 @@ public class BlockStorageCore extends EZBlockContainer {
 
 	public BlockStorageCore() {
 		super("storage_core", Material.wood);
+		this.setResistance(6000.0f);
 	}
 
 	@Override
