@@ -1,14 +1,13 @@
 package com.zerofall.ezstorage.gui;
 
+import com.zerofall.ezstorage.container.ContainerStorageCore;
+import com.zerofall.ezstorage.container.ContainerStorageCoreCrafting;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-
-import com.zerofall.ezstorage.container.ContainerStorageCore;
-import com.zerofall.ezstorage.container.ContainerStorageCoreCrafting;
-import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
 
 public class GuiHandler implements IGuiHandler {
 

@@ -1,7 +1,5 @@
 package com.zerofall.ezstorage.container;
 
-import com.zerofall.ezstorage.util.EZStorageUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -81,7 +79,7 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 	                			continue;
 	                		}
 	                		
-	                		tryToPopulateCraftingGrid(recipe);
+	                		tryToPopulateCraftingGrid(recipe, playerIn);
 	                	}
                 	} else {
                 		break;
@@ -116,7 +114,7 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 		        		}
 		        		ItemStack result = super.slotClick(slotId, clickedButton, mode, playerIn);
 		        		if (result != null) {
-		        			tryToPopulateCraftingGrid(recipe);
+		        			tryToPopulateCraftingGrid(recipe, playerIn);
 		        		}
 		        		return result;
 		        	}
@@ -127,7 +125,8 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 		return super.slotClick(slotId, clickedButton, mode, playerIn);
 	}
 	
-	private void tryToPopulateCraftingGrid(ItemStack[] recipe) {
+	private void tryToPopulateCraftingGrid(ItemStack[] recipe, EntityPlayer playerIn) {
+		clearGrid(playerIn);
 		for (int j = 0; j < recipe.length; j++) {
 			if (recipe[j] != null) {
 				if (recipe[j].stackSize > 1) {
@@ -167,6 +166,7 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 			ItemStack stack = this.craftMatrix.getStackInSlot(i);
 			if (stack != null) {
 				ItemStack result = this.tileEntity.input(stack);
+				this.craftMatrix.setInventorySlotContents(i, null);
 				if (result != null) {
 					playerIn.dropPlayerItemWithRandomChoice(result, false);
 				}
