@@ -1,7 +1,10 @@
 package com.zerofall.ezstorage.tileentity;
 
+import java.util.List;
+
+import com.zerofall.ezstorage.util.ItemGroup;
+
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
@@ -16,43 +19,42 @@ public class TileEntityOutputPort extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		if (core != null && !worldObj.isRemote) {
+			boolean updateCore = false;
 			BlockPos location = getPos().offset(EnumFacing.UP);
 			TileEntity tileentity = worldObj.getTileEntity(location);
             if (tileentity instanceof IInventory) {
 				IInventory inventory = (IInventory)tileentity;
-				if (inventory != null && !isInventoryFull(inventory, EnumFacing.DOWN)) {
-					ItemStack stack = core.getRandomStack();
-					TileEntityHopper.putStackInInventoryAllSlots(inventory, stack, EnumFacing.DOWN);
+				
+				if (inventory != null) {
+					List<ItemGroup> inventoryList = core.inventory.inventory;
+					if (inventoryList != null && inventoryList.size() > 0) {
+						ItemGroup group = inventoryList.get(0);
+						if (group != null) {
+							ItemStack stack = group.itemStack;
+							stack.stackSize = (int) Math.min((long)stack.getMaxStackSize(), group.count);
+							int stackSize = stack.stackSize;
+							ItemStack leftOver = TileEntityHopper.putStackInInventoryAllSlots(inventory, stack, EnumFacing.DOWN);
+							if (leftOver != null) {
+								int remaining = stackSize - leftOver.stackSize;
+								if (remaining > 0) {
+									group.count -= remaining;
+									updateCore = true;
+								}
+							} else {
+								group.count -= stackSize;
+								updateCore = true;
+							}
+							if (group.count <= 0) {
+								core.inventory.inventory.remove(0);
+							}
+						}
+					}
 				}
+            }
+            if (updateCore) {
+            	this.worldObj.markBlockForUpdate(core.getPos());
+				core.markDirty();
             }
 		}
 	}
-	
-	private boolean isInventoryFull(IInventory inventoryIn, EnumFacing side) {
-		if (inventoryIn instanceof ISidedInventory) {
-			ISidedInventory isidedinventory = (ISidedInventory) inventoryIn;
-			int[] aint = isidedinventory.getSlotsForFace(side);
-
-			for (int k = 0; k < aint.length; ++k) {
-				ItemStack itemstack1 = isidedinventory.getStackInSlot(aint[k]);
-
-				if (itemstack1 == null) {
-					return false;
-				}
-			}
-		} else {
-			int i = inventoryIn.getSizeInventory();
-
-			for (int j = 0; j < i; ++j) {
-				ItemStack itemstack = inventoryIn.getStackInSlot(j);
-
-				if (itemstack == null) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
 }
