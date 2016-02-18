@@ -22,3 +22,10 @@ EZStorage introduces an early-game storage system that scales and evolves as pla
 [Just Enough Items](https://github.com/mezz/JustEnoughItems) by mezz
 
 Current integrated version: jei_1.8.9-2.25.8.146
+
+
+##Issues
+Please use the issues link on this Github page to file any bugs. 
+
+**Note:**
+This mod is intented to be a compact storage solution, and not an automated storage network. As of right now, I do not want to include any features like filtered output, network cables, external monitors, wireless access, or anything else remeniscent of Applied Energistics. Any issues created as requests for these features will be immediately closed.
