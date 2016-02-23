@@ -24,7 +24,7 @@ repositories {
 	}
 }
 
-version = "1.8.9-1.2.4"
+version = "1.8.9-1.2.5"
 group= "com.zerofall.ezstorage"
 archivesBaseName = "ezstorage"
 
