@@ -185,13 +185,13 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 				count ++;
 			}
 			if (count > 1) {
-				if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().thePlayer != null) {
-					if (worldObj.isRemote) {
+				if (worldObj.isRemote) {
+					if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().thePlayer != null) {
 						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("You can only have 1 Storage Core per system!"));
-					} else if (worldObj.getBlockState(pos).getBlock() == EZBlocks.storage_core){
-						worldObj.setBlockToAir(getPos());
-						worldObj.spawnEntityInWorld(new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(EZBlocks.storage_core)));
 					}
+				} else if (worldObj.getBlockState(pos).getBlock() == EZBlocks.storage_core){
+					worldObj.setBlockToAir(getPos());
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(EZBlocks.storage_core)));
 				}
 				return false;
 			}
