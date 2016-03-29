@@ -10,7 +10,6 @@ import com.zerofall.ezstorage.network.RecipeMessage;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
-import mezz.jei.gui.RecipeLayout;
 import mezz.jei.gui.ingredients.IGuiIngredient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -53,15 +52,8 @@ public class RecipeTransferHandler implements IRecipeTransferHandler {
 					}
 				}
 			}
-			EZStorage.instance.networkWrapper.sendToServer(new RecipeMessage(recipe));
+			EZStorage.networkWrapper.sendToServer(new RecipeMessage(recipe));
 		}
 		return null;
 	}
-
-	@Override
-	public IRecipeTransferError transferRecipe(Container container, RecipeLayout recipeLayout, EntityPlayer player,
-			boolean doTransfer) {
-		return transferRecipe(container, recipeLayout, player, true, doTransfer);
-	}
-	
 }

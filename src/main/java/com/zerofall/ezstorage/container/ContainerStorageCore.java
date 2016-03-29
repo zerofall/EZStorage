@@ -1,16 +1,17 @@
 package com.zerofall.ezstorage.container;
 
+import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
 
 public class ContainerStorageCore extends Container {
 
@@ -23,7 +24,6 @@ public class ContainerStorageCore extends Container {
 		IInventory inventory = new InventoryBasic("title", false, this.rowCount()*9);
 		for (int i = 0; i < this.rowCount(); i++) {
             for (int j = 0; j < 9; j++) {
-            	int test1 = j + i * 9;
             	addSlotToContainer(new Slot(inventory, j + i * 9, startingX + j * 18, startingY + i * 18));
             }
 		}
@@ -34,7 +34,6 @@ public class ContainerStorageCore extends Container {
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				int test2 = (j + i * 9) + this.rowCount() * 9;
 				addSlotToContainer(new Slot(inventoryPlayer, (j + i * 9) + 9,
 						playerInventoryX() + j * 18, playerInventoryY() + i * 18));
 			}
@@ -53,7 +52,6 @@ public class ContainerStorageCore extends Container {
 	//Shift clicking
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-		ItemStack stack = null;
         Slot slotObject = (Slot) inventorySlots.get(index);
         if (slotObject != null && slotObject.getHasStack()) {
         	ItemStack stackInSlot = slotObject.getStack();
@@ -63,12 +61,11 @@ public class ContainerStorageCore extends Container {
 	}
 	
 	@Override
-	public ItemStack slotClick(int slotId, int clickedButton, int mode,
-			EntityPlayer playerIn) {
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
 		if (slotId < this.rowCount()*9 && slotId >= 0) {
 			return null;
 		}
-		return super.slotClick(slotId, clickedButton, mode, playerIn);
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 	
 	public ItemStack customSlotClick(int slotId, int clickedButton, int mode,

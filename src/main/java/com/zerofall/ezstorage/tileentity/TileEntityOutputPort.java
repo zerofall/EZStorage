@@ -2,15 +2,16 @@ package com.zerofall.ezstorage.tileentity;
 
 import java.util.List;
 
+import com.zerofall.ezstorage.util.EZStorageUtils;
 import com.zerofall.ezstorage.util.ItemGroup;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityOutputPort extends TileEntity implements ITickable {
 
@@ -52,7 +53,7 @@ public class TileEntityOutputPort extends TileEntity implements ITickable {
 				}
             }
             if (updateCore) {
-            	this.worldObj.markBlockForUpdate(core.getPos());
+            	EZStorageUtils.notifyBlockUpdate(core);
 				core.markDirty();
             }
 		}

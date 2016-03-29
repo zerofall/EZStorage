@@ -1,6 +1,7 @@
 package com.zerofall.ezstorage.container;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
@@ -101,9 +102,8 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 	}
 	
 	@Override
-	public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer playerIn) {
-		
-		if (mode == 0 && clickedButton == 0) {		
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+		//if (clickTypeIn == ClickType.QUICK_CRAFT) {		
     		if (slotId >= 0 && inventorySlots.size() > slotId) {
 				Slot slotObject = inventorySlots.get(slotId);
 		        if (slotObject != null) {
@@ -112,17 +112,17 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 		        		for (int i=0; i<9; i++) {
 		        			recipe[i] = this.craftMatrix.getStackInSlot(i);
 		        		}
-		        		ItemStack result = super.slotClick(slotId, clickedButton, mode, playerIn);
+		        		ItemStack result = super.slotClick(slotId, dragType, clickTypeIn, player);
 		        		if (result != null) {
-		        			tryToPopulateCraftingGrid(recipe, playerIn);
+		        			tryToPopulateCraftingGrid(recipe, player);
 		        		}
 		        		return result;
 		        	}
 		        }
     		}
     		
-		}
-		return super.slotClick(slotId, clickedButton, mode, playerIn);
+		//}
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 	
 	private void tryToPopulateCraftingGrid(ItemStack[] recipe, EntityPlayer playerIn) {

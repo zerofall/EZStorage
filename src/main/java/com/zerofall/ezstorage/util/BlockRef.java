@@ -2,7 +2,7 @@ package com.zerofall.ezstorage.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class BlockRef {
 	

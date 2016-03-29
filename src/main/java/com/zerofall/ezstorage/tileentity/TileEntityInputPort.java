@@ -7,10 +7,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 public class TileEntityInputPort extends TileEntity implements IInventory, ITickable, ISidedInventory {
 
@@ -26,10 +26,10 @@ public class TileEntityInputPort extends TileEntity implements IInventory, ITick
 	public boolean hasCustomName() {
 		return false;
 	}
-
+	
 	@Override
-	public IChatComponent getDisplayName() {
-		return new ChatComponentText("input_port");
+	public ITextComponent getDisplayName() {
+		return new TextComponentString("input_port");
 	}
 
 	@Override

@@ -10,8 +10,8 @@ public class XEventHandler {
 
 	@SubscribeEvent
 	public void onBlockBreak(BreakEvent e) {
-		if (!e.world.isRemote) {
-			TileEntity tileentity = e.world.getTileEntity(e.pos);
+		if (!e.getWorld().isRemote) {
+			TileEntity tileentity = e.getWorld().getTileEntity(e.getPos());
 			if (tileentity instanceof TileEntityStorageCore) {
 				TileEntityStorageCore core = (TileEntityStorageCore)tileentity;
 				if (core.inventory.getTotalCount() > 0) {

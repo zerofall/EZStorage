@@ -27,10 +27,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLLog;
 
 public class TileEntityStorageCore extends TileEntity implements ITickable {
@@ -51,14 +51,14 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 	
 	public ItemStack input(ItemStack stack) {
 		ItemStack result = this.inventory.input(stack);
-		this.worldObj.markBlockForUpdate(pos);
+		EZStorageUtils.notifyBlockUpdate(this);
 		this.markDirty();
 		return result;
 	}
 	
 	public ItemStack getRandomStack() {
 		ItemStack result = this.inventory.getItemsAt(0, 0);
-		this.worldObj.markBlockForUpdate(pos);
+		EZStorageUtils.notifyBlockUpdate(this);
 		this.markDirty();
 		return result;
 	}
@@ -69,12 +69,12 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 	}
 	
 	public void updateTileEntity() {
-		this.worldObj.markBlockForUpdate(pos);
+		EZStorageUtils.notifyBlockUpdate(this);
 		this.markDirty();
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.getNbtCompound());
 	}
 	
@@ -82,7 +82,7 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.pos, getBlockMetadata(), nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, getBlockMetadata(), nbtTag);
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 				inventory.maxItems += sb.getCapacity();
 			}
 		}
-		this.worldObj.markBlockForUpdate(pos);
+		EZStorageUtils.notifyBlockUpdate(this);
 	}
 	
 	
@@ -186,7 +186,7 @@ public class TileEntityStorageCore extends TileEntity implements ITickable {
 			if (count > 1) {
 				if (worldObj.isRemote) {
 					if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().thePlayer != null) {
-						Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("You can only have 1 Storage Core per system!"));
+						Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("You can only have 1 Storage Core per system!"));
 					}
 				} else if (worldObj.getBlockState(pos).getBlock() == EZBlocks.storage_core){
 					worldObj.setBlockToAir(getPos());

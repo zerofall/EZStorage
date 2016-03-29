@@ -3,7 +3,8 @@ package com.zerofall.ezstorage.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EZStorageUtils {
@@ -19,5 +20,12 @@ public class EZStorageUtils {
 		blockList.add(new BlockRef(world.getBlockState(new BlockPos(xCoord, yCoord, zCoord + 1)).getBlock(), xCoord, yCoord, zCoord + 1));
 		return blockList;
 	}
+	
+	public static void notifyBlockUpdate(TileEntity entity) {
+		notifyBlockUpdate(entity.getWorld(), entity.getPos());
+	}
 
+	public static void notifyBlockUpdate(World world, BlockPos pos) {
+		world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
+	}
 }
